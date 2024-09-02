@@ -8,3 +8,21 @@ span{
 header{
     padding-left: 150px;
 }
+header div{
+    display: flex; 
+    justify-content: space-between;
+}
+a{
+    color: rgb(172, 170, 170);
+}
+p{
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+.fa-solid.fa-xmark {
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
