@@ -27,3 +27,19 @@ p{
     position: absolute;
     right: 20px;
 }
+.dwnldText {
+    text-align: left;
+    padding: 20px;
+}
+
+.container {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;  
+    padding: 60px;
+}
+.g-col-6 img{
+    width: 800px;
+    padding-right: 80px;
+}
+
