@@ -86,3 +86,16 @@ function vote(voter){
     }
 }
 vote(voter);
+
+//Assignment #8
+const nums = [12,43,56,87,34,16,79,37,31];
+console.log(nums);
+const newNums = [];
+let j=0;
+for(i=0;i<nums.length;i++){
+    if(nums[i] % 2 == 0){
+        newNums[j]=nums[i];
+        j++;
+    }
+}
+console.log(newNums);
