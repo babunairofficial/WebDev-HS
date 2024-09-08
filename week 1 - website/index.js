@@ -99,3 +99,39 @@ for(i=0;i<nums.length;i++){
     }
 }
 console.log(newNums);
+
+//Assignment #9
+const arrOfUsers =[
+    {
+        name: "amit",
+        age: "21",
+        gender: "male"
+    },
+    {
+        name: "bipasha",
+        age: "18",
+        gender: "female"
+    },
+    {
+        name: "chandni",
+        age: "14",
+        gender: "female"
+    },
+    {
+        name: "Deepak",
+        age: "25",
+        gender: "male"
+    },
+];
+
+function eighteenPlus(arrOfUsers){
+    let usersAbove18=[];
+    for(i=0;i<arrOfUsers.length;i++){
+        if(parseInt(arrOfUsers[i].age)>=18){ //parseInt is used to convert string to integer
+            usersAbove18.push(arrOfUsers[i]);
+        }
+    }
+    return usersAbove18;
+}
+
+console.log(eighteenPlus(arrOfUsers));
