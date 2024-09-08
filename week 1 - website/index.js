@@ -135,3 +135,39 @@ function eighteenPlus(arrOfUsers){
 }
 
 console.log(eighteenPlus(arrOfUsers));
+
+//Assignment #10
+const arrOfUsers2 =[
+    {
+        name: "Esha",
+        age: "12",
+        gender: "female"
+    },
+    {
+        name: "francis",
+        age: "81",
+        gender: "male"
+    },
+    {
+        name: "gopi",
+        age: "41",
+        gender: "male"
+    },
+    {
+        name: "himanshi",
+        age: "52",
+        gender: "female"
+    },
+];
+
+function eighteenAndMale(arrOfUsers2){
+    let usersArr=[];
+    for(i=0;i<arrOfUsers2.length;i++){
+        if(parseInt(arrOfUsers2[i].age)>=18 && arrOfUsers2[i].gender =="male"){
+            usersArr.push(arrOfUsers2[i]);
+        }
+    }
+    return usersArr;
+}
+
+console.log(eighteenAndMale(arrOfUsers2));
