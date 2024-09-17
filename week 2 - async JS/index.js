@@ -35,3 +35,9 @@ let ans2 = sum(1000);
 console.log(ans2);
 let ans3 = sum(10000);
 console.log(ans3);
+
+// I/O heavy operations
+
+const readText = require("fs");
+const contents = readText.readFileSync("a.txt", "utf-8");
+console.log(contents)
