@@ -41,3 +41,26 @@ console.log(ans3);
 const readText = require("fs");
 const contents = readText.readFileSync("a.txt", "utf-8");
 console.log(contents)
+
+// Functional Argument
+//passing a function as an argument to another function
+
+function sum(a,b){
+    return a + b;
+}
+
+function subtract(a,b){
+    return a - b;
+}
+
+function divide(a,b){
+    return a / b;
+}
+
+function doOperation(a,b,op){
+    return op(a,b);
+}
+
+console.log(doOperation(1, 2, sum));
+console.log(doOperation(1, 2, subtract));
+console.log(doOperation(1, 2, divide));
