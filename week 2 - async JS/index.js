@@ -64,3 +64,11 @@ function doOperation(a,b,op){
 console.log(doOperation(1, 2, sum));
 console.log(doOperation(1, 2, subtract));
 console.log(doOperation(1, 2, divide));
+
+//asynchronous code
+
+function print(err, data){
+    console.log(data)
+}
+const contents1 = readText.readFile("b.txt", "utf-8", print);
+const contents2 = readText.readFile("c.txt", "utf-8", print)
