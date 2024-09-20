@@ -1,0 +1,4 @@
+                  Hello            
+                  This text is from d.txt
+
+                  
