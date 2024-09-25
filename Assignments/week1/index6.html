@@ -1,0 +1,124 @@
+<!--
+Now try making the bottom bar look like photo.png
+
+![Alt text](photo.png)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vs code bottom bar</title>
+
+    <style>
+        body{
+            background-color: black;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .bottomBar{            
+            color: white;
+            display: grid;
+            margin: 0 auto;
+            width: 1200px;
+            
+
+        }
+        p{
+            color: rgb(182, 179, 179);
+        }
+        .container{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            column-gap: 2rem;
+        }
+
+        .languages{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding-inline: 40px;
+            
+        }
+        .languages img{
+            height: 40px;
+            width: auto;
+        }
+        .lang{
+            display: flex;
+        }
+        .langName{
+            display: flex;
+            height: 100%;
+            align-items: center;
+        }
+        
+
+        
+
+
+    </style>
+</head>
+<body>
+    <div class="bottomBar">
+        <div class="container">
+            <div class="left">
+                <h2>Code in any language</h2>
+                <p>VS Code supports almost every major programming language. Several ship in the box, like JavaScript, TypeScript, CSS and HTML, but extensions for others can be found in the VS Code Marketplace.</p>
+            </div>
+            <div class="right">
+                <div class="languages">
+                    
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-js.png" alt="" />
+                        <code class="langName">JavaScript</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-ts.png" alt="" />
+                        <code class="langName">TypeScript</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-python.png" alt="" />
+                        <code class="langName">Python</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-cs.png" alt="" />
+                        <code class="langName">C#</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-cpp.png" alt="" />
+                        <code class="langName">C++</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-html.png" alt="" />
+                        <code class="langName">HTML</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-java.png" alt="" />
+                        <code class="langName">Java</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-json.png" alt="" />
+                        <code class="langName">JSON</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-php.png" alt="" />
+                        <code class="langName">PHP</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-markdown.png" alt="" />
+                        <code class="langName">Markdown</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-powershell.png" alt="" />
+                        <code class="langName">Powershell</code class="langName">
+                    </div>
+                    <div class="lang">
+                        <img src="https://code.visualstudio.com/assets/home/language-yaml.png" alt="" />
+                        <code class="langName">YAML</code class="langName">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
