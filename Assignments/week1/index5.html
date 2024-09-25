@@ -1,0 +1,85 @@
+<!--
+
+Create a grid layout now that looks like this
+
+1x width                    2x width
+---------------------------|--------------------------------
+|          Left            |                              |
+|  text text text text     |  col 1  |  col 2   |  col 3  |              
+|  text text text text     |  col 1  |  col 2   |  col 3  |
+|  text text text text     |  col 1  |  col 2   |  col 3  |
+|  text text text text     |                              |
+|                          |                              |
+---------------------------|--------------------------------
+
+
+![Alt text](photo.png)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complicated Grid</title>
+
+    <style>
+        
+        .container{
+            display: grid;
+            width: 1200px;
+            justify-content: center;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            
+        }
+        .left{
+            background-color: red;
+        }
+        .right{
+            background-color: blue;
+        }
+        .leftContents{
+            justify-content: center;
+        }
+        .rightContents{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 10px;
+            grid-row: 3;
+        }
+    </style>
+</head>
+<body>
+    <div id="complicatedGrid">
+        <div class="container">
+            <div class="left">
+                <div class="leftContents">
+                    <div class="horzCenter">Left</div>
+                    <div>text text text text text text text text text text text text text </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="rightContents">
+                    <div class="row1">
+                        <div class="col1">Col1</div>
+                        <div class="col2">Col2</div>
+                        <div class="col3">Col3</div>
+                    </div>
+                    <div class="row2">
+                        <div class="col1">Col1</div>
+                        <div class="col2">Col2</div>
+                        <div class="col3">Col3</div>
+                    </div>
+                    <div class="row3">
+                        <div class="col1">Col1</div>
+                        <div class="col2">Col2</div>
+                        <div class="col3">Col3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
