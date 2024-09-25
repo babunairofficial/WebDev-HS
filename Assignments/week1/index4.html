@@ -1,0 +1,52 @@
+<!--
+Do the same as the previous problem but use grid instead of flexbox.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout</title>
+    
+    <style>
+
+        #gridLayout{
+            display: grid;
+            justify-content: center;
+        }        
+        .container{
+            display: grid;
+            gap: 10px;
+            justify-content: center;
+            width: 1200px;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+        }
+        .left{
+            background-color: red;           
+        }
+        .right{
+            background-color: blue;           
+        }
+        .contents{
+            font-weight: bold;
+            font-size: 30px;
+            margin: 20px 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="gridLayout">
+        <div class="container">
+            <div class="left">
+                <div class="contents">Left</div>
+            </div>
+            <div class="right">
+                <div class="contents">Right</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
