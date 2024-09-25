@@ -1,0 +1,59 @@
+<!--
+Create a simple layout where you see div with red color on the left and blue color on the right.
+The right grid should be twice as wide as the left one.
+
+Contents of both the grids should be vertically centered
+
+Also make sure its max 1200px and center of the screen
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Layout</title>
+    
+    <style>
+        
+        #flexLayout{    
+            display: flex;            
+            justify-content: center;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            width: 1200px;
+        }
+        .left{
+            background-color: red;
+            /* width: 400px; */
+            flex-grow: 1;
+        }
+        .right{
+            background-color: blue;
+            /* width: 800px; */
+            flex-grow: 2;
+        }
+        .contents{
+            font-weight: bold;
+            font-size: 30px;
+            margin: 20px 0;
+
+        }
+    </style>
+
+</head>
+<body>
+    <div id="flexLayout">
+        <div class="container">
+            <div class="left">
+                <div class="contents">Left</div>
+            </div>
+            <div class="right">
+                <div class="contents">Right</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
