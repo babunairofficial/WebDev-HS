@@ -3,15 +3,26 @@ function setTimeoutPromisified(duration){
         setTimeout(resolve, duration)
     });
 }
-function oneSec(){
-    console.log("Hi");
-    setTimeoutPromisified(3000).then(threeSec);
-}
-function threeSec(){
+// function oneSec(){
+//     console.log("Hi");
+//     setTimeoutPromisified(3000).then(threeSec);
+// }
+// function threeSec(){
+//     console.log("Hello");
+//     setTimeoutPromisified(5000).then(fiveSec);
+// }
+// function fiveSec(){
+//     console.log("Hello there");
+// }
+// setTimeoutPromisified(1000).then(oneSec);
+
+//promisified callback or promise chaining
+setTimeoutPromisified(1000).then(function(){
+    console.log("hi");
+    return setTimeoutPromisified(3000);
+}).then(function(){
     console.log("Hello");
-    setTimeoutPromisified(5000).then(fiveSec);
-}
-function fiveSec(){
+    return setTimeoutPromisified(5000);
+}).then(function(){
     console.log("Hello there");
-}
-setTimeoutPromisified(1000).then(oneSec);
+});
