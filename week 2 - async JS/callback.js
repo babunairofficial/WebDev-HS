@@ -17,6 +17,7 @@ function setTimeoutPromisified(duration){
 // setTimeoutPromisified(1000).then(oneSec);
 
 //promisified callback or promise chaining
+/*
 setTimeoutPromisified(1000).then(function(){
     console.log("hi");
     return setTimeoutPromisified(3000);
@@ -26,3 +27,15 @@ setTimeoutPromisified(1000).then(function(){
 }).then(function(){
     console.log("Hello there");
 });
+*/
+
+//async await syntax
+async function solve(){
+    await setTimeoutPromisified(1000);
+    console.log("hi");
+    await setTimeoutPromisified(3000);
+    console.log("hello");
+    await setTimeoutPromisified(5000);
+    console.log("hello there");
+}
+solve();
