@@ -23,14 +23,20 @@ const transactions = [
   ];
 
 function calculateTotalSpentByCategory(transactions) {
-    //create an object
+
+    //check if input is array or not
+    if (!Array.isArray(transactions)) {
+      return [];
+    }
+    
+  //create an object
     const categoryTotals ={};
 
-    for(tr of transactions){
+    for(const tr of transactions){
         //object destructuring
         let {category, price} = tr;
 
-        if(!categoryTotals[category]){
+        if(!categoryTotals[category] === undefined){
             categoryTotals[category] = 0;
         }
         //if category exists then:
@@ -39,10 +45,10 @@ function calculateTotalSpentByCategory(transactions) {
     }
 
     //result
-    const result = [];
-    for(category in categoryTotals){
-        result.push({category:category, totalSpent:categoryTotals[category]});
-    }
+    const result = Object.entries(categoryTotals).map(([category, totalSpent]) => ({
+      category,
+      totalSpent
+    }));
     
     //return value
     return result;
