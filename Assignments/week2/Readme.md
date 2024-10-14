@@ -7,3 +7,7 @@ Medium-
 1. Count Vowels
 2. Palindrome
 3. Runtime 
+
+Hard-
+1. Calculator
+2. To Do List
