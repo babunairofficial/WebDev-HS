@@ -11,3 +11,10 @@ Medium-
 Hard-
 1. Calculator
 2. To Do List
+
+Async
+    Easy-
+    1. counter
+    2. counter without setInterval function
+    3. read from file
+    4. write to file
