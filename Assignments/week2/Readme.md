@@ -18,3 +18,7 @@ Async
     2. counter without setInterval function
     3. read from file
     4. write to file
+
+    Medium-
+    1. file cleaner
+    2. clock
