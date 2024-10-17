@@ -22,3 +22,9 @@ Async
     Medium-
     1. file cleaner
     2. clock
+
+    Hard-
+    1. promisify setTimeout
+    2. sleep completely
+    3. promise all
+    4. promise chain
