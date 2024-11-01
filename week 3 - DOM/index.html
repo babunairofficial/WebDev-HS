@@ -14,19 +14,27 @@
     <h4>yet another one</h4>
     <div>
         <input type="text" placeholder="enter a task" />
-        <button>Add Todo</button>
+        <button onclick="addTodo()">Add Todo</button>
     </div>
 
     <!--javascript-->
     <script>
+        
         var name = "babu nair";
         console.log(document); //document object here is a reference to the entire page
 
-        //querySelector
-        const inputElement = document.querySelector("input"); //select the input tag
-        console.log(inputElement); 
-        //to display the text entered in input tag, it can be done from the console of the browser. 
-        //Enter the following in the console of the browser: console.log(inputElement.value)
+        //define a function addTodo to perform certain tasks 'on click'
+        function addTodo(){
+            //querySelector
+            const inputElement = document.querySelector("input"); //select the input tag
+            console.log(inputElement); 
+            //to display the text entered in input tag, it can be done from the console of the browser. 
+            //Enter the following in the console of the browser: console.log(inputElement.value)
+
+            const value = inputElement.value;
+            console.log(value); //log the value of inputElement on click
+        }
+        
     </script>
 </body>
 
