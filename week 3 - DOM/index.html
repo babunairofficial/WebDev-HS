@@ -66,6 +66,18 @@
         //getElementsByClassName
         console.log(document.getElementsByClassName("todo")); //this is similar to the previous line of code, by using querySelectorAll(".todo");
 
+        //write code to change the value of second h4 tag by a stopwatch timer.
+        //declare the counter variable
+        let ctr = 0;
+        
+        //declare the function that brings the change
+        function func(){
+            document.querySelectorAll("h4")[1].innerHTML = ctr;
+            ctr++;
+        }
+
+        //call the function declared and set a timer
+        setInterval(func, 1000);
     </script>
 </body>
 
