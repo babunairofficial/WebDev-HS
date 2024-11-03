@@ -5,13 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Object Model (DOM)</title>
+
+    <style>
+        
+        #todo1{
+            background-color: brown;
+        }
+
+        .todo{
+            color: blueviolet;
+            background-color: darkgray;
+        }
+
+    </style>
+
 </head>
 
 <body>
-    <h1>To Do List</h1>
-    <h4>1. random task</h4>
-    <h4>2. another task</h4>
-    <h4>yet another one</h4>
+    <h1 id="todo1">To Do List</h1>
+    <h4 class="todo">1. random task</h4>
+    <h4 class="todo">2. another task</h4>
+    <h4 class="todo">yet another one</h4>
     <div>
         <input type="text" placeholder="enter a task" />
         <button onclick="addTodo()">Add Todo</button>
@@ -43,7 +57,11 @@
         console.log(document.querySelectorAll("h4")[1]); //selects the second h4 tag
         console.log(document.querySelectorAll("h4")[2]); //selects the third h4 tag
 
+        console.log(document.querySelectorAll("#todo1"));
         
+        //getElementById
+        console.log(document.getElementById("todo1")); //this is similar to the previous line of code, by using querySelectorAll("#todo1")
+
     </script>
 </body>
 
