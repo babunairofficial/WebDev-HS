@@ -23,9 +23,24 @@
 
 <body>
     <h1 id="todo1">To Do List</h1>
-    <h4 class="todo">1. random task</h4>
-    <h4 class="todo">2. another task</h4>
-    <h4 class="todo">yet another one</h4>
+
+    <div id="todo-1" style="display: flex;">
+        <h4 class="todo">1. random task</h4>
+        <button onclick="deleteTodo(1)">Delete</button>
+    </div>
+    <div id="todo-2" style="display: flex;">
+        <h4 class="todo">2. another task</h4>
+        <button onclick="deleteTodo(2)">Delete</button> 
+    </div>
+    <div id="todo-3" style="display: flex;">
+        <h4 class="todo">2. another task</h4>
+        <button onclick="deleteTodo(3)">Delete</button>
+    </div>
+    <div id="todo-4" style="display: flex;">
+        <h4 class="todo">yet another one</h4>
+        <button onclick="deleteTodo(4)">Delete</button>
+    </div>
+    
     <div>
         <input type="text" placeholder="enter a task" />
         <button onclick="addTodo()">Add Todo</button>
@@ -33,7 +48,7 @@
 
     <!--javascript-->
     <script>
-        
+        /*
         var name = "babu nair";
         console.log(document); //document object here is a reference to the entire page
 
@@ -78,6 +93,12 @@
 
         //call the function declared and set a timer
         setInterval(func, 1000);
+        */
+        function deleteTodo(index){
+            const element = document.getElementById("todo-"+index);
+            element.parentNode.removeChild(element);
+            //element.destroy();
+        }
     </script>
 </body>
 
