@@ -99,6 +99,15 @@
             element.parentNode.removeChild(element);
             //element.destroy();
         }
+
+        //adding elements
+
+        const element = document.createElement("div"); //create a new div element
+        element.innerHTML = "Hi there!"; //add some text in the div
+
+        const parentEl = document.querySelector("body"); //call the parent body
+
+        parentEl.appendChild(element); //add the new div element to the parent
     </script>
 </body>
 
