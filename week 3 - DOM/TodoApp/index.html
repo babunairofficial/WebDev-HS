@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Todo App</title>
+    </head>
+    <body>
+        <h1>Todo List</h1>
+        <div id="todos">
+            
+        </div>
+
+        <div class="addTask">
+            <input id="inp" type="text" placeholder="enter your task">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <script>
+            function addTask(){
+                const inp = document.getElementById("inp");
+                const task = document.createElement("div");
+                task.innerHTML = inp.value;
+                const parentEl = document.getElementById("todos");
+                parentEl.appendChild(task);
+            }
+        </script>
+    </body>
+</html>
