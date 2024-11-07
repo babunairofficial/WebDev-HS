@@ -14,12 +14,22 @@
         </div>
 
         <script>
+            let ctr = 1;
+            function deleteTodo(index){
+                const element = document.getElementById(index);
+                element.parentNode.removeChild(element)
+            }
             function addTask(){
                 const inp = document.getElementById("inp");
                 const task = document.createElement("div");
-                task.innerHTML = inp.value;
+                task.setAttribute("id", ctr)
+                
+                const value = inp.value;
+                task.innerHTML = "<div>" + value + "</div><button onclick = 'deleteTodo(" + ctr + ")'>delete</button>";
                 const parentEl = document.getElementById("todos");
                 parentEl.appendChild(task);
+                inp.value = "";
+                ctr++
             }
         </script>
     </body>
