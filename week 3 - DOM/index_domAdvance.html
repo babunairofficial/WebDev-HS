@@ -1,0 +1,46 @@
+<html>
+    <body>
+        <input type="text" placeholder="Enter task">
+        <button onclick="addTodo()">Add Todo!</button>
+
+        <script>
+            let todoCount = 0; // Counter to give each todo a unique id
+
+            function deleteTodo(index) {
+                const element = document.getElementById(index);
+                if (element) {
+                    element.parentNode.removeChild(element);
+                }
+            }
+
+            function addTodo() {
+                // Save the value entered
+                const value = document.querySelector("input").value;
+
+                // Create new span and button elements
+                const spanEl = document.createElement("span");
+                const buttonEl = document.createElement("button");
+
+                // Set the values of newly created elements
+                spanEl.innerHTML = value;
+                buttonEl.innerHTML = "Delete";
+
+                // Generate a unique id for the new div element
+                const divId = `todo-${todoCount++}`;
+                
+                // Create a div to hold the todo item and delete button
+                const divEl = document.createElement("div");
+                divEl.id = divId;
+                
+                // Set the button to call deleteTodo with the div's id
+                buttonEl.onclick = () => deleteTodo(divId);
+
+                // Append the elements to the div and add it to the DOM
+                divEl.appendChild(spanEl);
+                divEl.appendChild(buttonEl);
+                
+                document.querySelector("body").appendChild(divEl);
+            }
+        </script>
+    </body>
+</html>
