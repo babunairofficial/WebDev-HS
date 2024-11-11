@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <title>Advanced Background Color Changer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: #f0f0f0;
+            }
+            .color-panel {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            .color-panel button {
+                width: 80px;
+                height: 80px;
+                margin: 8px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                color: white;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease-in-out;
+            }
+            .color-panel button:hover {
+                transform: scale(1.1);
+            }
+            .custom-color {
+                background-color: #8c1aff;
+            }
+            .input-group {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .input-group input[type="color"] {
+                width: 50px;
+                height: 50px;
+                border: none;
+                border-radius: 4px;
+                margin-right: 10px;
+                cursor: pointer;
+            }
+            .input-group button {
+                padding: 8px 16px;
+                font-size: 16px;
+                font-weight: bold;
+                color: white;
+                background-color: #8c1aff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.2s ease-in-out;
+            }
+            .input-group button:hover {
+                background-color: #6e15d9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="color-panel">
+            <button class="red" onclick="bgChange('red')" style="background-color: red;">Red</button>
+            <button class="yellow" onclick="bgChange('yellow')" style="background-color: yellow;">Yellow</button>
+            <button class="black" onclick="bgChange('black')"style="background-color: black;">Black</button>
+            <button class="purple" onclick="bgChange('purple')"style="background-color: purple;">Purple</button>
+            <button class="green" onclick="bgChange('green')"style="background-color: green;">Green</button>
+            <button class="blue" onclick="bgChange('blue')"style="background-color: blue;">Blue</button>
+            <button class="default" onclick="bgChange('default')" style="color: black;">Default</button>
+        </div>
+        <div class="input-group">
+            <input type="color" id="color-picker" />
+            <button class="addColor" onclick="addColorOption()">Add Color</button>
+        </div>
+        <script>
+            function bgChange(color) {
+                if (color === 'default') {
+                    document.body.style.backgroundColor = '';
+                } else {
+                    document.body.style.backgroundColor = color;
+                }
+            }
+
+            function addColorOption() {
+                const colorPicker = document.getElementById('color-picker');
+                const newColor = colorPicker.value;
+                const newButton = document.createElement('button');
+                newButton.className = `custom-color`;
+                newButton.style.backgroundColor = newColor;
+                newButton.onclick = () => bgChange(newColor);
+                newButton.textContent = newColor;
+                document.querySelector('.color-panel').appendChild(newButton);
+            }
+        </script>
+    </body>
+</html>
