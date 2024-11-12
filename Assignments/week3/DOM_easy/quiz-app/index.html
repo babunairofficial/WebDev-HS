@@ -1,0 +1,148 @@
+<!--Quiz-App--> 
+<html>
+    <head>
+        <title>Quiz App</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                background-color: #f4f4f4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .container {
+                max-width: 600px;
+                background-color: white;
+                border-radius: 10px;
+                padding: 40px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .question {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            .answer {
+                display: block;
+                margin-bottom: 15px;
+                background-color: #f2f2f2;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .answer.selected {
+                background-color: #d1e7dd;
+                font-weight: bold;
+            }
+
+            button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+            #result {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 30px;
+            }
+
+            #restart {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Quiz App</h1>
+            <div id="quiz">
+                <div class="question"></div>
+                <div class="answer" data-letter="a"></div>
+                <div class="answer" data-letter="b"></div>
+                <div class="answer" data-letter="c"></div>
+                <div class="answer" data-letter="d"></div>
+            </div>
+            <button id="submit">Submit</button>
+            <div id="result"></div>
+            <button id="restart" style="display: none;">Restart Quiz</button>
+        </div>
+
+        <script type="module">
+            import { quizData } from './data.js';
+
+            const questionElement = document.querySelector('.question');
+            const answerElements = document.querySelectorAll('.answer');
+            const submitButton = document.getElementById('submit');
+            const resultElement = document.getElementById('result');
+            const restartButton = document.getElementById('restart');
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            function loadQuestion() {
+                const currentQuestion = quizData[currentQuestionIndex];
+                questionElement.textContent = currentQuestion.question;
+                answerElements.forEach((answerElement, index) => {
+                    answerElement.textContent = currentQuestion[String.fromCharCode(97 + index)];
+                    answerElement.classList.remove('selected');
+                });
+            }
+
+            function selectAnswer(event) {
+                if (event.target.classList.contains('answer')) {
+                    answerElements.forEach(answerElement => answerElement.classList.remove('selected'));
+                    event.target.classList.add('selected');
+                }
+            }
+
+            function submitQuiz() {
+                const currentQuestion = quizData[currentQuestionIndex];
+                const selectedAnswer = document.querySelector('.answer.selected');
+                if (selectedAnswer) {
+                    if (selectedAnswer.dataset.letter === currentQuestion.correct) {
+                        score++;
+                    }
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < quizData.length) {
+                        loadQuestion();
+                    } else {
+                        resultElement.textContent = `Your score is ${score} out of ${quizData.length}.`;
+                        submitButton.style.display = 'none';
+                        restartButton.style.display = 'inline-block';
+                    }
+                }
+            }
+
+            function restartQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                loadQuestion();
+                submitButton.style.display = 'inline-block';
+                restartButton.style.display = 'none';
+                resultElement.textContent = '';
+            }
+
+            loadQuestion();
+            answerElements.forEach(answerElement => answerElement.addEventListener('click', selectAnswer));
+            submitButton.addEventListener('click', submitQuiz);
+            restartButton.addEventListener('click', restartQuiz);
+        </script>
+    </body>
+</html>
