@@ -1,0 +1,173 @@
+<!--The-Pokémon--> 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Pokémon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .controls label, .controls select, .controls input, .controls button {
+            margin: 0 10px;
+            color: #333;
+        }
+        
+        #pokemon-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .card {
+            width: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            margin: 10px;
+            background-color: #7b7979;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            color: rgb(50, 185, 4);
+        }
+        
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .card h3 {
+            color: white;
+            margin: 10px 0 5px;
+        }
+        
+        .card p {
+            color: #ccc;
+            margin: 5px 0;
+        }
+        
+        .card .type {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .type.grass { background-color: #78c850; }
+        .type.fire { background-color: #f08030; }
+        .type.water { background-color: #6890f0; }
+        .type.electric { background-color: #f8d030; }
+        .type.normal { background-color: #a8a878; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pokémon Card Displayer</h1>
+        <div class="controls">
+            <label for="num-cards">Number of Cards:</label>
+            <input type="number" id="num-cards" min="1" max="20" value="3">
+            <label for="pokemon-category">Pokémon Category:</label>
+            <select id="pokemon-category">
+                <option value="grass">Grass</option>
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="electric">Electric</option>
+                <option value="normal">Normal</option>
+            </select>
+            <button onclick="displayPokemonCards()">Display Cards</button>
+        </div>
+        <div id="pokemon-cards"></div>
+    </div>
+
+    <script>
+        function displayPokemonCards() {
+            const numCards = document.getElementById('num-cards').value;
+            const category = document.getElementById('pokemon-category').value;
+            const pokemonCards = document.getElementById('pokemon-cards');
+            pokemonCards.innerHTML = '';
+
+            for (let i = 1; i <= numCards; i++) {
+                const randomId = Math.floor(Math.random() * 898) + 1; // 898 is the total number of Pokémon
+                fetchPokemonData(randomId, category, pokemonCards);
+            }
+        }
+
+        function fetchPokemonData(id, category, container) {
+            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.types.some(type => type.type.name === category)) {
+                        createPokemonCard(data, container);
+                    } else {
+                        fetchPokemonData(Math.floor(Math.random() * 898) + 1, category, container);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching Pokémon data:', error);
+                });
+        }
+
+        function createPokemonCard(pokemon, container) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            const image = document.createElement('img');
+            image.src = pokemon.sprites.front_default;
+            image.alt = pokemon.name;
+
+            const name = document.createElement('h3');
+            name.textContent = pokemon.name;
+
+            const typeElements = pokemon.types.map(type => {
+                const typeElement = document.createElement('span');
+                typeElement.classList.add('type', type.type.name);
+                typeElement.textContent = type.type.name;
+                return typeElement;
+            });
+
+            const type = document.createElement('div');
+            type.classList.add('types');
+            type.append(...typeElements);
+
+            const height = document.createElement('p');
+            height.textContent = `Height: ${pokemon.height / 10} m`;
+
+            const weight = document.createElement('p');
+            weight.textContent = `Weight: ${pokemon.weight / 10} kg`;
+
+            container.appendChild(card);
+            card.appendChild(image);
+            card.appendChild(name);
+            card.appendChild(type);
+            card.appendChild(height);
+            card.appendChild(weight);
+        }
+    </script>
+</body>
+</html>
