@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>Form Builder</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .form-controls {
+            flex: 1;
+        }
+        .field {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f5f5f5;
+        }
+        #preview {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f5f5f5;
+            height: 500px;
+            overflow-y: auto;
+        }
+        .preview-title {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Builder</h1>
+
+    <div class="container">
+        <div class="form-controls">
+            <label for="field-type">Field Type:</label>
+            <select id="field-type">
+                <option value="text">Text Input</option>
+                <option value="checkbox">Checkbox</option>
+                <option value="radio">Radio Button</option>
+            </select>
+            <label for="field-label">Label:</label>
+            <input type="text" id="field-label" placeholder="Enter label">
+            <button onclick="addField()">Add Field</button>
+        </div>
+
+        <div id="preview">
+            <h2 class="preview-title">Form Preview</h2>
+            <!-- Added fields will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function addField() {
+            const fieldType = document.getElementById("field-type").value;
+            const fieldLabel = document.getElementById("field-label").value;
+
+            const field = document.createElement("div");
+            field.classList.add("field");
+
+            switch (fieldType) {
+                case "text":
+                    field.innerHTML = `<label>${fieldLabel}</label><input type="text">`;
+                    break;
+                case "checkbox":
+                    field.innerHTML = `<input type="checkbox"> <label>${fieldLabel}</label>`;
+                    break;
+                case "radio":
+                    field.innerHTML = `<input type="radio" name="radio-group"> <label>${fieldLabel}</label>`;
+                    break;
+            }
+
+            document.getElementById("preview").appendChild(field);
+        }
+    </script>
+</body>
+</html>
