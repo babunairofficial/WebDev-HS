@@ -1,0 +1,331 @@
+<html>
+    <head>
+        <title>Taskify</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Arial, sans-serif;
+            }
+
+            body {
+                background-color: #f5f5f5;
+                padding: 20px;
+            }
+
+            .app-container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 30px;
+            }
+
+            .boards-container {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+
+            .board {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                min-height: 400px;
+            }
+
+            .board-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #eee;
+            }
+
+            .board h2 {
+                color: #333;
+                margin: 0;
+            }
+
+            .task {
+                background: #f8f9fa;
+                padding: 10px;
+                border-radius: 4px;
+                margin-bottom: 10px;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .task-content {
+                margin-right: 80px;
+                word-break: break-word;
+            }
+
+            .task:hover {
+                background: #e9ecef;
+                transform: translateY(-2px);
+            }
+
+            .board.todo h2 { color: #dc3545; }
+            .board.in-progress h2 { color: #ffc107; }
+            .board.under-review h2 { color: #17a2b8; }
+            .board.done h2 { color: #28a745; }
+
+            .input-container {
+                margin-bottom: 15px;
+            }
+
+            .input-container input {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            .input-container .btn-group {
+                display: flex;
+                gap: 8px;
+            }
+
+            .input-container button {
+                padding: 6px 12px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .input-container .save-btn {
+                background-color: #28a745;
+                color: white;
+            }
+
+            .task-buttons {
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: flex;
+                gap: 4px;
+            }
+
+            .delete-btn {
+                color: #dc3545;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .delete-btn:hover {
+                color: #c82333;
+            }
+
+            .move-btn {
+                padding: 2px 8px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            .back-btn {
+                padding: 2px 8px;
+                background-color: #6c757d;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            .move-btn:disabled,
+            .back-btn:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+
+            .move-btn:hover:not(:disabled) {
+                background-color: #0056b3;
+            }
+
+            .back-btn:hover:not(:disabled) {
+                background-color: #5a6268;
+            }
+
+            @media (max-width: 1200px) {
+                .boards-container {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .boards-container {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app-container">
+            <h1>Taskify</h1>
+            
+            <div class="boards-container">
+                <div class="board todo" data-board="todo">
+                    <div class="board-header">
+                        <h2>To Do</h2>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" placeholder="Enter new task">
+                        <div class="btn-group">
+                            <button class="save-btn" onclick="addTask()">Save</button>
+                        </div>
+                    </div>
+                    <div class="tasks" id="todo-tasks"></div>
+                </div>
+                
+                <div class="board in-progress" data-board="in-progress">
+                    <div class="board-header">
+                        <h2>In Progress</h2>
+                    </div>
+                    <div class="tasks" id="in-progress-tasks"></div>
+                </div>
+
+                <div class="board under-review" data-board="under-review">
+                    <div class="board-header">
+                        <h2>Under Review</h2>
+                    </div>
+                    <div class="tasks" id="under-review-tasks"></div>
+                </div>
+                
+                <div class="board done" data-board="done">
+                    <div class="board-header">
+                        <h2>Done</h2>
+                    </div>
+                    <div class="tasks" id="done-tasks"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Clear localStorage on page load (remove this in production)
+            localStorage.clear();
+            
+            // Initialize tasks object
+            let tasks = {
+                'todo': [],
+                'in-progress': [],
+                'under-review': [],
+                'done': []
+            };
+
+            // Workflow order
+            const workflowOrder = ['todo', 'in-progress', 'under-review', 'done'];
+
+            // Initialize the boards
+            function initializeBoards() {
+                Object.keys(tasks).forEach(boardKey => {
+                    const tasksContainer = document.getElementById(`${boardKey}-tasks`);
+                    tasksContainer.innerHTML = ''; // Clear existing tasks
+                    tasks[boardKey].forEach(taskText => {
+                        createTaskElement(taskText, boardKey);
+                    });
+                });
+            }
+
+            // Create a new task element
+            function createTaskElement(text, boardKey) {
+                const task = document.createElement('div');
+                task.className = 'task';
+                
+                // Get next and previous stages in workflow
+                const currentIndex = workflowOrder.indexOf(boardKey);
+                const nextStage = currentIndex < workflowOrder.length - 1 ? workflowOrder[currentIndex + 1] : null;
+                const prevStage = currentIndex > 0 ? workflowOrder[currentIndex - 1] : null;
+                
+                const moveButton = nextStage ? 
+                    `<button class="move-btn" onclick="moveTask('${text}', '${boardKey}', '${nextStage}')">→</button>` : 
+                    `<button class="move-btn" disabled>→</button>`;
+
+                const backButton = prevStage ? 
+                    `<button class="back-btn" onclick="moveTask('${text}', '${boardKey}', '${prevStage}')">←</button>` : 
+                    `<button class="back-btn" disabled>←</button>`;
+
+                task.innerHTML = `
+                    <div class="task-content">${text}</div>
+                    <div class="task-buttons">
+                        ${backButton}
+                        ${moveButton}
+                        <button class="delete-btn" onclick="deleteTask('${text}', '${boardKey}')">×</button>
+                    </div>
+                `;
+                
+                document.getElementById(`${boardKey}-tasks`).appendChild(task);
+            }
+
+            // Add new task
+            function addTask() {
+                const input = document.querySelector('.input-container input');
+                const text = input.value.trim();
+                
+                if (text) {
+                    tasks.todo.push(text);
+                    createTaskElement(text, 'todo');
+                    input.value = '';
+                    saveTasks();
+                }
+            }
+
+            // Move task between stages
+            function moveTask(taskText, sourceStage, targetStage) {
+                // Remove from source stage
+                tasks[sourceStage] = tasks[sourceStage].filter(t => t !== taskText);
+                
+                // Add to target stage
+                tasks[targetStage].push(taskText);
+                
+                // Update UI
+                initializeBoards();
+                saveTasks();
+            }
+
+            // Delete task
+            function deleteTask(taskText, boardKey) {
+                tasks[boardKey] = tasks[boardKey].filter(t => t !== taskText);
+                initializeBoards();
+                saveTasks();
+            }
+
+            // Save tasks to localStorage
+            function saveTasks() {
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+
+            // Load tasks from localStorage
+            function loadTasks() {
+                const savedTasks = localStorage.getItem('tasks');
+                if (savedTasks) {
+                    tasks = JSON.parse(savedTasks);
+                }
+                initializeBoards();
+            }
+
+            // Add enter key support for input
+            document.querySelector('.input-container input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+
+            // Initialize the app
+            loadTasks();
+        </script>
+    </body>
+</html>
