@@ -7,4 +7,8 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+app.get('/asd', function (req, res) {
+    res.send('Entered ASD. Good work!')
+  })
+
 app.listen(3000) //the port to listen to and run the application
