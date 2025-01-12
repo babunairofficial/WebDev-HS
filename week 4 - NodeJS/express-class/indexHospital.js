@@ -36,6 +36,15 @@ app.post("/", function(req, res){
     res.json({
         msg: "Done!"
     })
-}) 
+})
+
+app.put("/", function(req, res){
+    for(let i = 0; i<users[0].kidneys.length; i++){
+        users[0].kidneys[i].healthy = true;
+    }
+    res.json({ //incase json data is not sent the process is hung
+        msg: "update complete." //this field can be left blank
+    })
+})
 
 app.listen(3000);
