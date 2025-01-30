@@ -13,8 +13,8 @@ async function getRecentPost(){
     //made the function asynchronous. await keyword is used only in an async function
     
     //store the response received in a variable
-    // const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-    const response = await fetch("here.json"); 
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+    // const response = await fetch("here.json"); 
     //fetch being a promise, await keyword is used.
     //await keyword ensures the execution is completed only after the promise is resolved.
 
@@ -24,5 +24,6 @@ async function getRecentPost(){
     //.json() method is actually an async promise-based method.
 
     console.log(data);
+    document.getElementById("posts").innerHTML = data.body;
 }
 getRecentPost();
