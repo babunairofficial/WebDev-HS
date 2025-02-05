@@ -45,4 +45,6 @@ app.get("/add", requestIncrement, sumHandler) //endpoint 1
 
 app.get("/multiply", requestIncrement, multiplyHandler) //endpoint 2 
 
+// alternatively, app.use can help to avoid typing in requestIncrement handler in each endpoints.
+
 app.listen(3000);
