@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <!-- using axios instead of fetch method -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" integrity="sha512-v8+bPcpk4Sj7CKB11+gK/FnsbgQ15jTwZamnBf/xDmiQDcgOIYufBo6Acu1y30vrk8gg5su4x0CG3zfPaq5Fcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- write a function to execute on button click -->
+    <script>
+        async function sendRequest() {
+            alert("hi");
+
+            const a = document.getElementById("a").value;
+            const b = document.getElementById("b").value;
+            const response = await axios.post("http://localhost:3000/sum", {
+                a: a,
+                b: b
+            });
+            
+            //log the response
+            console.log(response.data);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="a" placeholder="First Value">
+    <input type="text" id="b" placeholder="Second Value">
+
+    <!-- send a request on button click -->
+    <button onclick = "sendRequest()">Find sum</button>
+    
+</body>
+</html>

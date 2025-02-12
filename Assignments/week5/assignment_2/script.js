@@ -1,9 +1,12 @@
 /* create a backend server in node.js, that returns the sum endpoint */
 
 const express = require('express');
+const cors = require('cors'); //install cors to bypass browser issues with cors
+
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 //middleware
 function endpointLog(req, res, next) {
