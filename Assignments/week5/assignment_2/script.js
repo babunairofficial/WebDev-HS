@@ -3,6 +3,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 //middleware
 function endpointLog(req, res, next) {
     console.log("endpointLog hit");
@@ -11,14 +13,14 @@ function endpointLog(req, res, next) {
 
 //Request handler
 function sumHandler(req, res) {
-    const a = parseInt(req.query.a);
-    const b = parseInt(req.query.b);
+    const a = parseInt(req.body.a);
+    const b = parseInt(req.body.b);
 
     res.json({
         ans: a + b
     });
 }
 //sum endpoint
-app.get('/sum', endpointLog, sumHandler);
+app.post('/sum', endpointLog, sumHandler);
 
 app.listen(3000);
