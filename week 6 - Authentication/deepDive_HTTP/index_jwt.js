@@ -1,8 +1,12 @@
-/* ------ Authenticated tokens ----- */
+/* ------ JWT ------ */
+/* replace the tokens with JWT */
 
-
-//Import the Express framework
 const express = require("express");
+const jwt = require("jsonwebtoken");
+
+//Secret key used for signing and verifying JWTs
+//In production, this should be stored securely in environment variables
+const JWT_SECRET = "iambatman";
 
 //create an express application instance
 const app = express();
@@ -12,11 +16,6 @@ app.use(express.json());
 
 //initialize an empty array to store user data (alternative to database for now)
 const users =  []; //in memory variable storage
-
-//function to return a random string
-function generateToken(){
-    return (Math.random() + 1).toString(36).substring(7);
-}
 
 //user registration handler
 function signupHandler(req, res) {
@@ -57,10 +56,19 @@ function signinHandler(req, res) {
 
     //If user is found, generate and return authentication token
     if (user) {
-        const token = generateToken();
-        //Add token to user object
-        user.token = token;
+        // generate JWT containing user information 
+        //jwt.sign() creates a token with:
+            //1. payload (user data to encode)
+            //2. Secret key (fpr sogmatire)
+            //3. Optional options (expiry, algorithm, etc. )
+
+        const token = jwt.sign({ //sign the specific username
+            //what needs to be encrypt
+            username: username 
+        }, JWT_SECRET); //convert the username to a token using my JWT 
         
+        //no need to store in the database as the token has all the information encoded inside now
+        //Return JWT to client
         res.send({ //send token in response
             token
         });
@@ -75,12 +83,24 @@ function signinHandler(req, res) {
 //handler funtion to retrieve authenticated ser's information
 //this endpoint requires a valid token in the request header
 //Headers are key-value pairs in the HTTP request metadata
+
 function meHandler(req, res) {
+    
     //Extract the authentication token form request headers
-    const token = req.headers.token;
+    const token = req.headers.token; // now a jwt
+
+    //verify and decode JWT
+    //jwt.verfy() checks if:
+        //1. Token was signed with secret key
+        //2. Token hasn't expired
+        //3. Token hasnnt been tampered with
+
+    const decodedInformation = jwt.verify(token, JWT_SECRET);
+
+    const username = decodedInformation.username;
 
     // find() method is used to return the value of the first element that passes the test
-    const user = users.find(user => user.token === token); //returns the full information of the user as per the token, 
+    const user = users.find(user => user.username === username); // 
     // if token not found then undefined is returned
 
     //log user object
