@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Stack Application</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" integrity="sha512-v8+bPcpk4Sj7CKB11+gK/FnsbgQ15jTwZamnBf/xDmiQDcgOIYufBo6Acu1y30vrk8gg5su4x0CG3zfPaq5Fcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        async function signup() {
+            const username = document.getElementById("signup-username").value;
+            const password = document.getElementById("signup-password").value;
+            console.log(username);
+            console.log(password);
+
+            //send a post request
+            await axios.post("http://localhost:3000/signup", {
+                username: username,
+                password: password
+            });
+            alert("You are signed in");
+        }
+
+        
+        
+    </script>
 </head>
 <body>
     
@@ -11,10 +30,10 @@
      <div class="signup">
         <h2>Signup</h2>
         <div class="input_box">
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" placeholder="Enter your email" id="signup-username" required>
         </div>
         <div class="input_box">
-            <input type="password" placeholder="Enter your password" required>
+            <input type="password" placeholder="Enter your password" id="signup-password" required>
         </div>
         <button class="button" onclick="signup()">Signup</button>                   
      </div>
@@ -23,7 +42,7 @@
      <div class="signin">
         <h2>Signin</h2>
         <div class="input_box">
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" placeholder="Enter your email" id="signin-username" required>
         </div>
         <div class="input_box">
             <input type="password" placeholder="Enter your password" required>
