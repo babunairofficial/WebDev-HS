@@ -80,10 +80,15 @@ function meHandler(req,res) {
         })
     }
 }
+//load frontend from backend server for index.html file
+app.get("/", function(req, res){
+    res.sendFile(__dirname + "/index.html");
+});
 //introduce 3 endpoint  - signup, signin, me
 app.post("/signup", signUpHandler);
 app.post("/signin", signInHandler);
 app.get("/me", meHandler);
+
 
 //start server on port 
 app.listen(3000);
