@@ -38,9 +38,20 @@
             //get the token for signin => store it in localstorage
             localStorage.setItem("token", response.data.token); //for all subsequent requests the token is send.
 
+            getUserInformation(); //this function added here to automatically call the function to update the information when signed in.
             alert("You are signed in");
         }
         
+        //user information
+        async function getUserInformation() {
+            const response = await axios.get("http://localhost:3000/me", {
+                headers: {
+                    token: localStorage.getItem("token") //send the token for every request after signin
+                }
+            })
+            document.getElementById("information").innerHTML = "Username: " + response.data.username + " Password: " + response.data.password;
+        }
+
         /*host the page from backend. "index.js"*/
         
     </script>
