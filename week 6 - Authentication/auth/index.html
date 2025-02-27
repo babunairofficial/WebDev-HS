@@ -52,6 +52,11 @@
             document.getElementById("information").innerHTML = "Username: " + response.data.username + " Password: " + response.data.password;
         }
 
+        //logout function
+        function logout() {
+            localStorage.removeItem("token");
+        }
+
         /*host the page from backend. "index.js"*/
         
     </script>
