@@ -6,6 +6,8 @@
     <title>Full Stack Application</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" integrity="sha512-v8+bPcpk4Sj7CKB11+gK/FnsbgQ15jTwZamnBf/xDmiQDcgOIYufBo6Acu1y30vrk8gg5su4x0CG3zfPaq5Fcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+
+        //signup function
         async function signup() {
             const username = document.getElementById("signup-username").value;
             const password = document.getElementById("signup-password").value;
@@ -20,6 +22,25 @@
             alert("You are signed in");
         }
 
+        //signin function
+        async function signin() {
+            const username = document.getElementById("signin-username").value;
+            const password = document.getElementById("signin-password").value;
+            console.log(username);
+            console.log(password);
+
+            //send a post request
+            const response = await axios.post("http://localhost:3000/signin", {
+                username: username,
+                password: password
+            });
+            
+            //get the token for signin => store it in localstorage
+            localStorage.setItem("token", response.data.token); //for all subsequent requests the token is send.
+
+            alert("You are signed in");
+        }
+        
         /*host the page from backend. "index.js"*/
         
     </script>
@@ -45,7 +66,7 @@
             <input type="email" placeholder="Enter your email" id="signin-username" required>
         </div>
         <div class="input_box">
-            <input type="password" placeholder="Enter your password" required>
+            <input type="password" placeholder="Enter your password" id="signin-password" required>
         </div>
         <button class="button" onclick="signin()">Signin</button>
      </div>
