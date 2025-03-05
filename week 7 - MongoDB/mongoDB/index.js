@@ -46,19 +46,30 @@ app.post("/login", async function(req, res){
         })
     }
 });
-app.post("/todo", auth, function(req, res){
+app.post("/todo", auth, async function(req, res){
     const userId = req.userId;
+    const title = req.body.title;
+    const done = req.body.done;
+
+    await TodoModel.create({
+        title,
+        userId,
+        done
+    });
 
     res.json({
-        userId: userId
+        message: "Todo created"
     });
 });
 
-app.get("/todos", auth, function(req, res){
+app.get("/todos", auth, async function(req, res){
     const userId = req.userId;
+    const todos = await TodoModel.find({
+        userId: userId
+    });
 
     res.json({
-        userId: userId
+        todos
     });
 });
 
