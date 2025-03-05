@@ -46,12 +46,36 @@ app.post("/login", async function(req, res){
         })
     }
 });
-app.post("/todo", function(req, res){
+app.post("/todo", auth, function(req, res){
+    const userId = req.userId;
 
+    res.json({
+        userId: userId
+    });
 });
 
-app.get("/todos", function(req, res){
+app.get("/todos", auth, function(req, res){
+    const userId = req.userId;
 
+    res.json({
+        userId: userId
+    });
 });
+
+//authentication middleware
+function auth(req, res, next){
+    const token = req.headers.token;
+
+    const decodedData = jwt.verify(token, JWT_SECRET);
+
+    if (decodedData) {
+        req.userId = decodedData.id;
+        next();
+    } else {
+        res.status(403).json({
+            message: "Incorrect credentials"
+        });
+    }
+}
 
 app.listen(3000);
