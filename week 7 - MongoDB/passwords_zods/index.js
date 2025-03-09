@@ -10,6 +10,7 @@ const { UserModel, TodoModel } = require("./db");  // Import database models fro
 const jwt = require("jsonwebtoken");       // For creating and verifying JSON Web Tokens
 const mongoose = require("mongoose");      // MongoDB ODM (Object Data Modeling)
 const JWT_SECRET = "jamesbond";            // Secret key for JWT signing (should be in .env file in production)
+const { z } = require("zod");
 
 // Connect to MongoDB database
 mongoose.connect("");
@@ -33,10 +34,25 @@ app.use(express.json());
  * - JSON object with success message or error message
  */
 app.post("/signup", async function(req, res){
-    // Extract user data from request body
-    const username = req.body.username;
-    const password = req.body.password;
-    const name = req.body.name;
+    const requiredBody = z.object({
+        username: z.string().min(3).max(100).email(),
+        name: z.string().min(3).max(100),
+        password: z.string().min(3).max(30)
+    });
+
+    const parsedDataWithSuccess = requiredBody.safeParse(req.body); 
+    //safeParse also returns the list of errors in the input
+
+    if (!parsedDataWithSuccess.success) {
+        res.json({
+            message: "Incorrect format",
+            error: parsedDataWithSuccess.error
+       });
+        return
+    }
+
+    // Use the validated data from Zod (this is important!)
+    const { username, password, name } = parsedDataWithSuccess.data;
 
     try {
         // Check if user already exists
