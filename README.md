@@ -42,3 +42,8 @@
         Auth
         Connecting Frontend to Backend
         JWT
+    
+    # Week 7 - MondoDB
+        MongoDB
+        Passwords
+        Zods
