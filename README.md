@@ -36,3 +36,9 @@
         Filter
         Arrow Fns
         Fetch vs Axios
+
+    # Week 6 - Authentications
+        HTTP Deep Dive
+        Auth
+        Connecting Frontend to Backend
+        JWT
