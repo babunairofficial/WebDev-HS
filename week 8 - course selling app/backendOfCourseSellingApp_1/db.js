@@ -1,4 +1,4 @@
-const {Schema} = require("mongoose");
+const mongoose = require("mongoose");
 mongoose.connect("");
 
 const Schema = mongoose.Schema;
@@ -37,7 +37,7 @@ const adminModel = mongoose.model("admin", adminSchema);
 const courseModel = mongoose.model("course", courseSchema);
 const purchaseModel = mongoose.model("purchase", purchaseSchema);
 
-modeule.exports = {
+module.exports = {
     userModel,
     adminModel,
     courseModel,
