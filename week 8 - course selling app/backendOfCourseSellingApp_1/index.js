@@ -6,6 +6,7 @@ const { courseRouter } = require("./routes/course");
 const { adminRouter } = require("./routes/admin");
 
 const app = express(); //create an instance of express http server
+app.use(express.json()); //necessary to read through middleware that is passed with a json data.
 
 const port = 3000;
 
@@ -18,7 +19,7 @@ app.use("/admin", adminRouter);
 async function main(){
   await mongoose.connect("");
   app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Example app listening on port ${port}`); 
   });
 }
 
