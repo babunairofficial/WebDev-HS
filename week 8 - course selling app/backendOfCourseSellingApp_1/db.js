@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const userSchema = new Schema({
     //_id would be generated automatically 
     email: {type: String, unique: true},
-    passowrd: String,
+    password: String,
     firstName: String,
     lastName: String,
 });
