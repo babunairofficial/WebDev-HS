@@ -2,6 +2,10 @@ const express = require('express');
 const adminRouter = express.Router();
 const {adminModel} = require("../db"); 
 
+const jwt = require("jsonwebtoken");
+
+const JWT_ADMIN_PASSWORD = "leadersOfDC";
+
 adminRouter.post('/signup', async (req, res) => {
     const { email, password, firstName, lastName } = req.body; //add zod validation
     
@@ -18,10 +22,29 @@ adminRouter.post('/signup', async (req, res) => {
         message: "signup endpoint"
     });
 });
-adminRouter.post('/login', (req, res) => {
-    res.json({
-        message: "login endpoint"
+adminRouter.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    
+    
+    const admin = await adminModel.findOne({ 
+        email: email,
+        password: password
     });
+
+    
+    if (admin) {
+        const token = jwt.sign({
+            id:admin._id
+        }, JWT_ADMIN_PASSWORD);
+        
+        res.json({
+            token: token
+        });
+    } else {
+        res.status(403).json({
+            message: "Incorrect credentials"
+        });
+    }
 });
 adminRouter.post('/course', (req, res) => {
     res.json({
