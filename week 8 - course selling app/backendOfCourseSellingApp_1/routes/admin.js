@@ -1,11 +1,12 @@
 const express = require('express');
 const adminRouter = express.Router();
-const {adminModel} = require("../db"); 
+const {adminModel, courseModel} = require("../db"); 
 
 const jwt = require("jsonwebtoken");
 
 //import jwt admin password from config.js
 const {JWT_ADMIN_PASSWORD} = require("../config");
+const { adminMiddleware } = require('../middleware/admin');
 
 
 
@@ -49,9 +50,21 @@ adminRouter.post('/login', async (req, res) => {
         });
     }
 });
-adminRouter.post('/course', (req, res) => {
+adminRouter.post('/course', adminMiddleware, async (req, res) => {
+    //get the adminId
+    const adminId = req.adminId;
+
+    //elements required in course creation
+    const {title, description, imageUrl, price} = req.body;
+
+    const course = await courseModel.create({
+        //check for the courseSchema in db.js 
+        title, description, imageUrl, price, creatorId: adminId
+    })
+
     res.json({
-        message: "create a course endpoint"
+        message: "Course created",
+        courseId: course._id
     });
 });
 adminRouter.get('/course/bulk', (req, res) => {
