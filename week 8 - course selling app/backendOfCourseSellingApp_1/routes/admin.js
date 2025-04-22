@@ -4,7 +4,10 @@ const {adminModel} = require("../db");
 
 const jwt = require("jsonwebtoken");
 
-const JWT_ADMIN_PASSWORD = "leadersOfDC";
+//import jwt admin password from config.js
+const {JWT_ADMIN_PASSWORD} = require("../config");
+
+
 
 adminRouter.post('/signup', async (req, res) => {
     const { email, password, firstName, lastName } = req.body; //add zod validation
