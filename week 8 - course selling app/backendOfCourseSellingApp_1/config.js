@@ -4,8 +4,8 @@
 
 //jwt passwords
 
-const JWT_USER_PASSWORD = "dccomicsheroes007";
-const JWT_ADMIN_PASSWORD = "leadersOfDC";
+const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD;
+const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD;
 
 //export the passwords
 

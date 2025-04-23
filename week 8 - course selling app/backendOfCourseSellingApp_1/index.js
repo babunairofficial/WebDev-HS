@@ -1,3 +1,5 @@
+require('dotenv').config();
+console.log(process.env.MONGO_URL);
 const express = require('express');
 const mongoose = require("mongoose");
 
@@ -17,7 +19,7 @@ app.use("/admin", adminRouter);
 
 //wait for database connect before connecting to the backend.
 async function main(){
-  await mongoose.connect("");
+  await mongoose.connect(process.env.MONGO_URL);
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`); 
   });
