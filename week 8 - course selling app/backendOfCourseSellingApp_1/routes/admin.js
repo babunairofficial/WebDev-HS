@@ -87,9 +87,16 @@ adminRouter.put('/course', adminMiddleware, async (req, res) => {
         courseId: course._id
     });
 });
-adminRouter.get('/course/bulk', (req, res) => {
+adminRouter.get('/course/bulk', adminMiddleware, async (req, res) => {
+    const adminId = req.adminId;
+
+    const courses = await courseModel.find({
+        creatorId: adminId
+    });
+
     res.json({
-        message: "list all courses endpoint"
+        message: "list all courses endpoint",
+        courses
     });
 });
 
