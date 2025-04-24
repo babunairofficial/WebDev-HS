@@ -67,6 +67,26 @@ adminRouter.post('/course', adminMiddleware, async (req, res) => {
         courseId: course._id
     });
 });
+adminRouter.put('/course', adminMiddleware, async (req, res) => {
+    //get the adminId
+    const adminId = req.adminId;
+
+    //elements required in course updation
+    const {title, description, imageUrl, price, courseId} = req.body;
+
+    const course = await courseModel.updateOne({
+        _id: courseId,
+        creatorId: adminId
+    }, {
+        //check for the courseSchema in db.js 
+        title, description, imageUrl, price
+    })
+
+    res.json({
+        message: "Course updated",
+        courseId: course._id
+    });
+});
 adminRouter.get('/course/bulk', (req, res) => {
     res.json({
         message: "list all courses endpoint"
