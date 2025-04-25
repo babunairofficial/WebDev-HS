@@ -47,3 +47,6 @@
         MongoDB
         Passwords
         Zods
+
+    # Week 8 - Course Selling App
+        Backend of Course Selling App
