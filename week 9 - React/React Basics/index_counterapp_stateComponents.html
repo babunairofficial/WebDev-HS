@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter app using state/components</title>
+</head>
+<body>
+    <div id="buttonParent"></div>
+
+    <script>
+        let state = {
+            count: 0
+        }
+
+        function onButtonPress() {
+            state.count++;
+            buttonComponentReRender(); // In React this line would not be required to be written, React does the function on its own, re-rendering is done automatically
+        }
+
+        /* -- 1st approach -- */
+        // function buttonComponentReRender() {
+        //     document.getElementById("buttonParent").innerHTML = "";
+        //     const button = document.createElement("button");
+        //     button.innerHTML = `Counter ${state.count}`;
+        //     button.setAttribute("onclick", `onButtonPress()`);
+        //     document.getElementById("buttonParent").appendChild(button);
+        // }
+
+        /* --2nd approach -- using the way as to how React works -- */
+        function buttonComponentReRender() {
+            document.getElementById("buttonParent").innerHTML = "";
+            const component = buttonComponent(state.count); 
+            document.getElementById("buttonParent").appendChild(component);
+        }
+        //re-rendering is done on its own by REACT
+
+        function buttonComponent(count) {
+            const button = document.createElement("button");
+            button.innerHTML = "Counter " + count;
+            button.setAttribute("onclick", `onButtonPress()`);
+            return button;
+        }
+
+        buttonComponentReRender();
+    </script>
+</body>
+</html>
