@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function App() {
@@ -13,6 +13,23 @@ function App() {
 //React component is a function which returns some HTML.
 function Counter() {
   const [count, setCount] = useState(0);
+
+  //hooking into the lifecycle events (mounting, re-rendering, unmounting) of react
+  // console.log("counter");
+
+  //guard our setInterval from re-renders
+  useEffect(function() {
+    setInterval(function() {
+
+      // setCount(count => count + 1);
+      setCount(function(count) {
+        return count + 1;
+      })
+    }, 1000)
+    console.log("mounted");
+  }, []);
+  
+
   function increaseCount() {
     setCount(count + 1 );
   }
