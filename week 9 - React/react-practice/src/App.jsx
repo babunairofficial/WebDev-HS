@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
 
+//conditional rendering
 function App() {
+  let counterVisible = true; //the Counter component will display as long as it is true here.
+
   return <div>
     <b>
       hi there
     </b>
-    <Counter></Counter>
+    {counterVisible ? <Counter></Counter> : null}
   </div>
 }
 
@@ -24,7 +27,7 @@ function Counter() {
       // setCount(count => count + 1);
       setCount(function(count) {
         return count + 1;
-      })
+      });
     }, 1000)
     console.log("mounted");
   }, []);
