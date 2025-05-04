@@ -21,7 +21,7 @@ function App() {
                     <PostComponent 
                             name={"viru"}
                             subtitle={"Promoted"}
-                            time={"9m ago"}
+                            
                             image={"https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?t=st=1746336689~exp=1746340289~hmac=07154c1575f9ea226aa19eb8334fe2bb161de9399d8d7701e6dc12fafc590b88&w=826"}
                             description={"Learn to be explosive"}
                         />
@@ -31,7 +31,7 @@ function App() {
                     <PostComponent 
                             name={"rahul"}
                             subtitle={20}
-                            time={"15m ago"}
+                            time={null}
                             image={"https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?t=st=1746336689~exp=1746340289~hmac=07154c1575f9ea226aa19eb8334fe2bb161de9399d8d7701e6dc12fafc590b88&w=826"}
                             description={"Master your emotions."}
                         />
@@ -63,11 +63,11 @@ function PostComponent({name, subtitle, time, image, description}) {
                     {name}
                 </b>
                 <div>{subtitle}</div>
-                <div style={{display: "flex"}}>
+                {time && <div style={{display: "flex"}}>
                     <div>{time}</div>
                     <img src={"https://w7.pngwing.com/pngs/473/569/png-transparent-graphy-clock-clock-icon-angle-number-noun-project-thumbnail.png"} style={{width: 10, height: 10}} />
 
-                </div>
+                </div>}
             </div>        
             
         </div>
