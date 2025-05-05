@@ -8,6 +8,7 @@ function App() {
             <div style={{display: "flex", justifyContent: "center"}}>
                 <div>
                     <div>
+                        <NotificationCount />
                         <ToggleMessage />
                         <PostComponent 
                             name={"sachin"}
@@ -52,7 +53,8 @@ function App() {
 const style = { width: 200, backgroundColor: "white", borderRadius: 10, borderColor: "grey", borderWidth: 1, padding: 20};
 
 const ToggleMessage = () => {
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false); //state variable
+    //state variable helps to re-render component whenever the variables change.
 
     return (
         <div>
@@ -60,6 +62,19 @@ const ToggleMessage = () => {
                 Toggle Message
             </button>
             {isVisible && <p>This message is conditionally rendered!</p>}
+        </div>
+    );
+};
+
+const NotificationCount = () => {
+    const [notificationCount, setNotificationCount] = useState(0); 
+
+    return (
+        <div>
+            <button onClick={() => setNotificationCount(notificationCount + 1)}>
+                Notifcation Count
+            </button>
+            {notificationCount}
         </div>
     );
 };
