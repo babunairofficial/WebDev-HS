@@ -1,49 +1,45 @@
-// import { useState } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { PostComponent } from "./Post";
-
 
 function App() {
-    const [ posts, setPosts ] = useState([]);
+    const [currentTab, setCurrentTab] = useState(1);
+    const [tabData, setTabData] = useState({});
 
-    
+    useEffect(function() {
+        console.log("send request to backend to get data for tab" + currentTab);
+        fetch("https://dummyjson.com/todos/" + currentTab)
+        .then(async res => {
+            const json = await res.json();
+            setTabData(json);
+        });
+    }, [currentTab])
 
-    //[<PostComponent>]
+    return <div>
+        <button onClick={function() {
+            setCurrentTab(1)
+        }} style={{color: currentTab == 1 ? "red" : "black"}}>TODO #1
 
-    const postComponents = posts.map(post => <PostComponent
-        name={post.name}
-        subtitle={post.subtitle}
-        time={post.title}
-        image={post.image}
-        description={post.description}
-        />)
+        </button>
+        <button onClick={function() {
+            setCurrentTab(2)
+        }} style={{color: currentTab == 2 ? "red" : "black"}}>TODO #2
 
-    function addPost() {
-        setPosts([...posts, {
-                name: "viru",
-                subtitle: "900 followers",
-                time: "20m ago",
-                image: "https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?t=st=1746336689~exp=1746340289~hmac=07154c1575f9ea226aa19eb8334fe2bb161de9399d8d7701e6dc12fafc590b88&w=826",
-                description: "pushing another set of post component"
-        }])
-        
-    }
+        </button>
+        <button onClick={function() {
+            setCurrentTab(3)
+        }} style={{color: currentTab == 3 ? "red" : "black"}}>TODO #3
 
-    return (
-        <div style={{background:"lightgrey", height: "100vh",  }}>
-            <button onClick={addPost}>Add Post</button>
-            <div style={{display: "flex", justifyContent: "center"}}>
-                
-                <div>
-                    {postComponents}
+        </button>
+        <button onClick={function() {
+            setCurrentTab(4)
+        }} style={{color: currentTab == 4 ? "red" : "black"}}>TODO #4
 
-                
-                </div>
-                
-            </div>
-        </div>
-    )
- 
+        </button>
+        <br />
+
+        {/* add the required object element */}
+        {tabData.todo} 
+    </div>
 }
 
 export default App
