@@ -4,13 +4,16 @@ import { useState } from "react";
 function App() {
     const [currentTab, setCurrentTab] = useState(1);
     const [tabData, setTabData] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(function() {
+        setLoading(true);
         console.log("send request to backend to get data for tab" + currentTab);
         fetch("https://dummyjson.com/todos/" + currentTab)
         .then(async res => {
             const json = await res.json();
             setTabData(json);
+            setLoading(false);
         });
     }, [currentTab])
 
@@ -38,7 +41,8 @@ function App() {
         <br />
 
         {/* add the required object element */}
-        {tabData.todo} 
+        {loading ? "Loading..." : tabData.todo}
+        
     </div>
 }
 
