@@ -50,3 +50,14 @@
 
     # Week 8 - Course Selling App
         Backend of Course Selling App
+
+    # Week 9 - React
+        Basics
+        UseState
+        UseEffect
+        Conditional Rendering
+        Children
+        List and Keys
+        Lifecycle events
+        Error boundary
+        Fragment
