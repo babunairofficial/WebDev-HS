@@ -1,6 +1,6 @@
 
 import './App.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
 
 function App() {
   return <div>
@@ -20,7 +20,7 @@ function App() {
   </div>
 }
 
-//conponent
+//component
 function Class11Program() {
   return <div>
     NEET programmes for Class 11th
@@ -29,8 +29,15 @@ function Class11Program() {
 
 //component
 function Class12Program() {
+  const navigate = useNavigate();
+
+  function redirectUser() {
+    navigate("/")
+  }
+
   return <div>
     NEET programmes for Class 12th
+    <button onClick={redirectUser}>Go back to landing page</button>
   </div>
 }
 
