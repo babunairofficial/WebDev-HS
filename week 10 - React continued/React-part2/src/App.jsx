@@ -1,22 +1,22 @@
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 
 // a clock with a start and stop button
 function App() {
   const [currentCount, setCurrentCount] = useState(1);
-  const [timer, setTimer] = useState(0);
+  const timer = useRef();
 
   function startClock() {
     let value = setInterval(function() {
       setCurrentCount(c => c + 1);
     }, 1000);
-    setTimer(value);
+    timer.current = value;
   }
 
   function stopClock() {
-    console.log(timer)
-    clearInterval(timer);
+    console.log(timer.current);
+    clearInterval(timer.current);
   }
 
   return <div>
