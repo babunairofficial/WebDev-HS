@@ -1,8 +1,14 @@
-
 import './App.css'
 
 
 function App() {
+  
+  function focusOnInput() {
+    document.getElementById('name').focus();
+    
+}
+
+
   return <div>
     Sign up
     <input type="text" id='name'/>
@@ -11,10 +17,6 @@ function App() {
     <button onClick={focusOnInput}>Submit</button>
    
   </div>
-}
-
-function focusOnInput() {
-  document.getElementById('name').focus()
 }
 
 export default App
