@@ -1,28 +1,31 @@
 
-import { useRef } from 'react'
+import { useState } from 'react'
 import './App.css'
 
-
+// a clock with a start and stop button
 function App() {
+  const [currentCount, setCurrentCount] = useState(1);
+  const [timer, setTimer] = useState(0);
 
-  // using a hook for DOM manipulation
-  const inputRef = useRef();
+  function startClock() {
+    let value = setInterval(function() {
+      setCurrentCount(c => c + 1);
+    }, 1000);
+    setTimer(value);
+  }
 
-  
-function focusOnInput() {
-  // document.getElementById('name').focus()
-  inputRef.current.focus();
-}
-
+  function stopClock() {
+    console.log(timer)
+    clearInterval(timer);
+  }
 
   return <div>
-    Sign up
-    <input type="text" id='name' ref={inputRef}/>
-    <input type="text" />
-    <input type="text" />
-    <button onClick={focusOnInput}>Submit</button>
-   
+    {currentCount}
+    <br />
+    <button onClick={startClock}>Start</button>
+    <button onClick={stopClock}>Stop</button>
   </div>
+
 }
 
 export default App
