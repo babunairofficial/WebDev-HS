@@ -61,3 +61,11 @@
         Lifecycle events
         Error boundary
         Fragment
+
+    # Week 10 - React Continued
+        Routing
+        Layouts
+        useRef
+        Rolling up the state
+        Prop drilling
+        Context API
