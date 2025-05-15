@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react"
 
-export function usePostTitle() {
+export function useFetch(url) {
 
-    const [post, setPost] = useState({});
+    const [finalData, setfinalData] = useState({});
 
     //define the function
-    async function getPosts() {
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+    async function getDetails() {
+        const response = await fetch(url);
         const json = await response.json();
-        setPost(json);
+        setfinalData(json);
     }
 
     useEffect(() => {
-        getPosts(); //called a function, which is defined above
-    }, [])
+        getDetails(); //called a function, which is defined above
+    }, [url])
 
-    return post.title;
+    return {
+        finalData
+    }
 }
