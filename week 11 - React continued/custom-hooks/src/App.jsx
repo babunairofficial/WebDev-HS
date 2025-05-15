@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react"
+
+import { usePostTitle } from "./hooks/useFetch"
 
 
 function App() {
-  const [post, setPost] = useState({});
-
-  //define the function
-  async function getPosts() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-    const json = await response.json();
-    setPost(json);
-  }
-  useEffect(() => {
-    getPosts(); //called a function, which is defined above
-  }, [])
+  const postTitle = usePostTitle();
 
   return (
     <div>
-      {post.title}
+      {postTitle}
     </div>
   )
 }
