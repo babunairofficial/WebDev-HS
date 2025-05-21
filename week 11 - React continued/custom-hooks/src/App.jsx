@@ -1,22 +1,30 @@
-import { useState } from "react";
-import { usePrev } from "./hooks/use-prev";
+import { useRef} from "react";
+
+
+function useDebounce(originalFn) {
+  const currentClock = useRef();
+  
+  const fn = () => {
+    clearTimeout(currentClock.current);
+    currentClock.current = setTimeout(originalFn, 200);
+  }
+
+  return fn;
+
+}
 
 function App() {
- const [state, setState] = useState(0);
- const prev = usePrev(state);
+ function sendDataToBackend() {
+  fetch("api.amazon.com/search/");
+ }
 
- return(
+ const debouncedFn = useDebounce(sendDataToBackend);
+
+ return (
   <>
-    <p>{state}</p>
-    <button
-      onClick={() => {
-        setState((curr) => curr + 1);
-      }}>
-        Click Me
-      </button>
-      <p>The previous value was {prev}</p>
+    <input type="text" onChange={debouncedFn}></input>
   </>
- );
+ )
 }
 
 
