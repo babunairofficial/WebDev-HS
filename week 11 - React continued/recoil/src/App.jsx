@@ -1,57 +1,60 @@
-
-import './App.css';
-import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
-import { counterAtom } from './store/atoms/counter';
+import { useState, useEffect, memo } from "react";
 
 function App() {
-
-  return (
-    <RecoilRoot>
-      <Counter />
-    </RecoilRoot>
-  )
-  
+    return (
+        <div>
+            <Counter />
+        </div>
+    );
 }
 
 function Counter() {
+    const [count, setCount] = useState(0);
   
-  return <div>
-    
-    <CurrentCount />
-    <Increase />
-    <Decrease />
-  </div>
-}
-
-function CurrentCount() {
-  const count = useRecoilState(counterAtom);
-  return <div>
-    {count}
-  </div>
-}
-
-function Increase() {
-  const setCount = useSetRecoilState(counterAtom);
-  function increase() {
-    setCount(c => c + 1);
-  }
-
-  return <div>
-    <button onClick={increase}>Increase</button>
-  </div>
-}
-
-function Decrease() {
-
-  const setCount = useSetRecoilState(counterAtom);
+    useEffect(() => {     
+        const interval = setInterval(() => {
+            setCount((c) => c + 1);
+        }, 3000);
   
-  function decrease() {
-    setCount(c => c - 1);
-  }
-
-  return <div>
-    <button onClick={decrease}>Decrease</button>
-  </div>
+        return () => clearInterval(interval);
+    }, []);
+    return (
+        <div> 
+            <CurrentCount count={count} />
+  
+            <Increase setCount={setCount} />
+  
+            <Decrease setCount={setCount} />
+        </div>
+    );
 }
 
-export default App
+const CurrentCount = memo(function({ count }) {
+
+    return (
+
+        <h1>{count}</h1> 
+    );
+});
+
+const Decrease = memo(function({ setCount }) {
+    function decrease() {
+        setCount((c) => c - 1);
+    }
+
+    return (
+        <button onClick={decrease}>Decrease</button>
+    ); 
+});
+
+const Increase = memo(function({ setCount }) {
+    function increase() {
+        setCount((c) => c + 1); 
+    }
+
+    return (
+        <button onClick={increase}>Increase</button>
+    ); 
+});
+
+export default App;
