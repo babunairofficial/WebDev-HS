@@ -1,60 +1,51 @@
-import { useState, useEffect, memo } from "react";
+//install react@18.2.0 as recoil might not be compatible with the latest version of react.
+
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
+import { counterAtom, evenSelector } from "./store/atoms/counter";
 
 function App() {
-    return (
-        <div>
+
+    return <div>
+        <RecoilRoot>
+            <Buttons />
             <Counter />
-        </div>
-    );
+            <IsEven />
+        </RecoilRoot>
+        
+    </div>
 }
 
-function Counter() {
-    const [count, setCount] = useState(0);
-  
-    useEffect(() => {     
-        const interval = setInterval(() => {
-            setCount((c) => c + 1);
-        }, 3000);
-  
-        return () => clearInterval(interval);
-    }, []);
-    return (
-        <div> 
-            <CurrentCount count={count} />
-  
-            <Increase setCount={setCount} />
-  
-            <Decrease setCount={setCount} />
-        </div>
-    );
-}
+function Buttons() {
+    const setCount = useSetRecoilState(counterAtom);
 
-const CurrentCount = memo(function({ count }) {
-
-    return (
-
-        <h1>{count}</h1> 
-    );
-});
-
-const Decrease = memo(function({ setCount }) {
-    function decrease() {
-        setCount((c) => c - 1);
-    }
-
-    return (
-        <button onClick={decrease}>Decrease</button>
-    ); 
-});
-
-const Increase = memo(function({ setCount }) {
     function increase() {
-        setCount((c) => c + 1); 
+        setCount(c => c + 2)
     }
 
-    return (
+    function decrease() {
+        setCount(c => c - 1)
+    }
+
+    return <div>
         <button onClick={increase}>Increase</button>
-    ); 
-});
+        <button onClick={decrease}>Decrease</button>
+    </div>
+}
+
+function Counter() { //subscribes to the atom
+    const count = useRecoilValue(counterAtom);
+
+    return <div>
+        {count}
+    </div>
+}
+
+function IsEven() { //subscribes to the selector (derived state), and not to the atom
+    const even = useRecoilValue(evenSelector);
+
+    return <div>
+        {even ? "Even" : "Odd"}
+    </div>
+}
 
 export default App;
