@@ -69,3 +69,14 @@
         Rolling up the state
         Prop drilling
         Context API
+    
+    # Week 11 - React Continued
+        custom hooks
+        useFetch
+        usePostTitle
+        usePrev
+        useDebounce
+        Recoil
+        Memo
+        Selector
+
