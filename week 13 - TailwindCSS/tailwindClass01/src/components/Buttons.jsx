@@ -1,7 +1,7 @@
 function Button({disabled, children, onClick}) {
     return (
         <>
-            <span onClick={onClick} className={`px-32  py-8 rounded-2xl text-4xl text-white cursor-pointer ${disabled ? "bg-gray-400" : "bg-green-400"}`}>
+            <span onClick={onClick} className={`px-16  py-2 rounded-2xl text-4xl text-white cursor-pointer ${disabled ? "bg-gray-400" : "bg-green-400"}`}>
                 {children}
             </span>
         </>
