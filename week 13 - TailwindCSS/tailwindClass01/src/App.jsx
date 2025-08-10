@@ -7,12 +7,14 @@ function App() {
   
   return (
     <>
-      <div className='h-screen bg-cyan-900'>
+      {/* <div className='h-screen bg-cyan-900'>
         <Input type={"text"} placeholder={"Username"}>Input</Input>
         <Button disabled={true}>Confirm</Button>
         <Otp></Otp>
           
-      </div>
+      </div> */}
+
+      
       
 
     </>
