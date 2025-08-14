@@ -14,8 +14,10 @@ function App() {
           
       </div> */}
 
-      
-      
+      <div className='h-screen bg-white dark:bg-amber-900'>
+        <h1 className='text-black dark:text-white'>Hi friends</h1>
+        {/* the darkmode would depend on the browser darkmode */}
+      </div>      
 
     </>
   )
