@@ -17,6 +17,10 @@ function App() {
       <div className='h-screen bg-white dark:bg-amber-900'>
         <h1 className='text-black dark:text-white'>Hi friends</h1>
         {/* the darkmode would depend on the browser darkmode */}
+
+        <button onClick={() => {
+          document.querySelector("html").classList.toggle("dark")
+        }} className='dark:text-white'>Toggle theme</button>
       </div>      
 
     </>
