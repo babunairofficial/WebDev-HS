@@ -83,3 +83,9 @@
 ## Week 12 - Figma
 - Designing
 
+## Week 13 - Tailwind
+- Tailwind intro
+- Ref Arrays
+- Components in Tailwind
+- Creating Sidebars
+
